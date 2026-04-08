@@ -122,3 +122,4 @@ Fonctions:
 - Controllers API: `app/Http/Controllers/Api`
 - Middleware auth/role: `app/Http/Middleware/AuthenticateApiToken.php`, `app/Http/Middleware/EnsureRole.php`
 - Player view: `resources/views/player.blade.php`
+# stage-projet-
