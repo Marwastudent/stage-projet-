@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('matricule')->unique();
             $table->string('localisation');
+            $table->string('maps_url', 500)->nullable();
             $table->timestamps();
 
             $table->index(['name', 'matricule']);

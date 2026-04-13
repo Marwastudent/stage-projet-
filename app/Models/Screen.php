@@ -34,4 +34,9 @@ class Screen extends Model
     {
         return $this->hasMany(AdSchedule::class);
     }
+
+    public function programs(): HasMany
+    {
+        return $this->hasMany(Program::class);
+    }
 }

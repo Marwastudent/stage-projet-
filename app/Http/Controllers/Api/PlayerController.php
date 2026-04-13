@@ -6,12 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Models\AdSchedule;
 use App\Models\Screen;
 use App\Models\ScreenPlaylist;
+use Carbon\CarbonInterface;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class PlayerController extends Controller
 {
-    public function feed(string $device_key): JsonResponse
+    public function feed(Request $request, string $device_key): JsonResponse
     {
         $screen = Screen::with('sportsHall')->where('device_key', $device_key)->first();
 
@@ -19,6 +21,15 @@ class PlayerController extends Controller
             return response()->json([
                 'message' => 'Screen not found.',
             ], 404);
+        }
+
+        $serverClock = $this->makeServerClock();
+        $planningData = $this->buildPlanningPayload($screen, $serverClock);
+
+        if ($request->string('mode')->lower()->value() === 'planning') {
+            return response()->json([
+                'data' => $planningData,
+            ]);
         }
 
         $now = now();
@@ -71,13 +82,21 @@ class PlayerController extends Controller
             ->values();
 
         if (! $assignment || ! $assignment->playlist) {
+            if ($this->planningHasPrograms($planningData)) {
+                return response()->json([
+                    'data' => $planningData,
+                ]);
+            }
+
             return response()->json([
                 'data' => [
+                    'mode' => 'media',
                     'screen' => $screen,
                     'playlist' => null,
                     'items' => [],
                     'ads' => $ads,
-                    'generated_at' => now(),
+                    'generated_at' => $serverClock['iso'],
+                    'server_clock' => $serverClock,
                 ],
             ]);
         }
@@ -106,8 +125,15 @@ class PlayerController extends Controller
             ->filter()
             ->values();
 
+        if ($items->isEmpty() && $this->planningHasPrograms($planningData)) {
+            return response()->json([
+                'data' => $planningData,
+            ]);
+        }
+
         return response()->json([
             'data' => [
+                'mode' => 'media',
                 'screen' => $screen,
                 'playlist' => [
                     'id' => $playlist->id,
@@ -115,7 +141,8 @@ class PlayerController extends Controller
                 ],
                 'items' => $items,
                 'ads' => $ads,
-                'generated_at' => now(),
+                'generated_at' => $serverClock['iso'],
+                'server_clock' => $serverClock,
             ],
         ]);
     }
@@ -125,5 +152,78 @@ class PlayerController extends Controller
         return view('player', [
             'deviceKey' => $device_key,
         ]);
+    }
+
+    private function buildPlanningPayload(Screen $screen, array $serverClock): array
+    {
+        $programs = $screen->programs()
+            ->where('is_active', true)
+            ->ordered()
+            ->get()
+            ->map(function ($program): array {
+                return [
+                    'id' => $program->id,
+                    'title' => $program->title,
+                    'course_type' => $program->course_type,
+                    'day' => $program->day,
+                    'start_time' => substr((string) $program->start_time, 0, 5),
+                    'end_time' => substr((string) $program->end_time, 0, 5),
+                    'computed_end_time' => $program->computed_end_time,
+                    'duration' => (int) $program->duration,
+                    'coach' => $program->coach,
+                    'room' => $program->room,
+                    'display_order' => (int) $program->display_order,
+                    'is_active' => (bool) $program->is_active,
+                ];
+            })
+            ->values()
+            ->all();
+
+        return [
+            'mode' => 'planning',
+            'screen' => [
+                'id' => $screen->id,
+                'name' => $screen->name,
+                'device_key' => $screen->device_key,
+                'status' => $screen->status,
+                'emplacement' => $screen->emplacement,
+                'sports_hall' => $screen->sportsHall?->only(['id', 'name', 'localisation']),
+            ],
+            'programs' => $programs,
+            'generated_at' => $serverClock['iso'],
+            'server_clock' => $serverClock,
+        ];
+    }
+
+    private function makeServerClock(): array
+    {
+        $timezone = (string) config('app.timezone', 'UTC');
+        $serverNow = now()->setTimezone($timezone);
+
+        return [
+            'iso' => $serverNow->toIso8601String(),
+            'timezone' => $timezone,
+            'date' => $serverNow->toDateString(),
+            'time' => $serverNow->format('H:i:s'),
+            'day_key' => $this->dayKeyFromDate($serverNow),
+        ];
+    }
+
+    private function dayKeyFromDate(CarbonInterface $date): string
+    {
+        return match ($date->dayOfWeekIso) {
+            1 => 'lundi',
+            2 => 'mardi',
+            3 => 'mercredi',
+            4 => 'jeudi',
+            5 => 'vendredi',
+            6 => 'samedi',
+            default => 'dimanche',
+        };
+    }
+
+    private function planningHasPrograms(array $planningData): bool
+    {
+        return ! empty($planningData['programs']);
     }
 }

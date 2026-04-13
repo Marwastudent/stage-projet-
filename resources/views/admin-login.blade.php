@@ -9,16 +9,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-a: #051018;
-            --bg-b: #10364a;
-            --bg-c: #0f5c63;
-            --panel: rgba(8, 20, 30, 0.78);
-            --line: rgba(255, 255, 255, 0.15);
-            --txt: #eaf6ff;
-            --soft: #9ec0d2;
-            --ok: #37d9b2;
-            --err: #ff6b6b;
-            --main: #ffb100;
+            --bg-a: #050505;
+            --bg-b: #0b0b0b;
+            --bg-c: #000000;
+            --panel: rgba(8, 8, 8, 0.88);
+            --line: rgba(165, 126, 28, 0.42);
+            --txt: #f8f7f2;
+            --soft: #f2d583;
+            --ok: #f2d583;
+            --err: #ff7a7a;
+            --main: #a57e1c;
             --font-body: "Manrope", "Trebuchet MS", sans-serif;
             --font-title: "Rajdhani", "Franklin Gothic Medium", sans-serif;
         }
@@ -35,8 +35,8 @@
             font-family: var(--font-body);
             color: var(--txt);
             background:
-                radial-gradient(circle at 14% 12%, rgba(255, 177, 0, 0.26), transparent 34%),
-                radial-gradient(circle at 82% 86%, rgba(55, 217, 178, 0.20), transparent 36%),
+                radial-gradient(circle at 14% 12%, rgba(165, 126, 28, 0.30), transparent 34%),
+                radial-gradient(circle at 84% 84%, rgba(255, 255, 255, 0.10), transparent 36%),
                 linear-gradient(145deg, var(--bg-a), var(--bg-b) 56%, var(--bg-c));
             padding: 14px;
         }
@@ -55,6 +55,7 @@
             font-size: 1.55rem;
             font-family: var(--font-title);
             letter-spacing: 0.05em;
+            color: #ffffff;
         }
 
         p {
@@ -73,7 +74,7 @@
             width: 100%;
             border-radius: 10px;
             border: 1px solid var(--line);
-            background: #081726;
+            background: #111111;
             color: var(--txt);
             padding: 10px;
             font: 500 0.94rem var(--font-body);
@@ -81,13 +82,13 @@
 
         button {
             cursor: pointer;
-            background: rgba(255, 177, 0, 0.26);
-            border-color: rgba(255, 177, 0, 0.62);
+            background: rgba(165, 126, 28, 0.34);
+            border-color: rgba(242, 213, 131, 0.58);
         }
 
         .secondary {
-            background: rgba(55, 217, 178, 0.20);
-            border-color: rgba(55, 217, 178, 0.58);
+            background: rgba(242, 213, 131, 0.22);
+            border-color: rgba(242, 213, 131, 0.54);
         }
 
         .msg {
@@ -124,6 +125,7 @@
 
 <script>
     const msg = document.getElementById('msg');
+    const ADMIN_PORTAL_URL = @json(route('admin.portal'));
 
     function setMessage(text, mode = '') {
         msg.textContent = text || '';
@@ -172,7 +174,7 @@
 
         try {
             await api('/me', { token });
-            window.location.href = '/admin/dashboard';
+            window.location.href = ADMIN_PORTAL_URL;
         } catch {
             localStorage.removeItem('club_api_token');
         }
@@ -192,7 +194,7 @@
             localStorage.setItem('club_api_token', payload.token);
             setMessage('Connexion reussie. Redirection...', 'ok');
             setTimeout(() => {
-                window.location.href = '/admin/dashboard';
+                window.location.href = ADMIN_PORTAL_URL;
             }, 350);
         } catch (error) {
             setMessage(error.message, 'error');

@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->foreignId('screen_id')->constrained()->cascadeOnDelete();
             $table->foreignId('media_id')->constrained('media')->cascadeOnDelete();
-            $table->timestamp('starts_at');
-            $table->timestamp('ends_at');
+            $table->dateTime('starts_at');
+            $table->dateTime('ends_at');
             $table->unsignedInteger('display_every_loops')->default(1);
             $table->unsignedInteger('duration_override')->nullable();
             $table->boolean('is_active')->default(true)->index();

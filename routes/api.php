@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\AdScheduleController;
+use App\Http\Controllers\Api\CoachController;
 use App\Http\Controllers\Api\MediaController;
 use App\Http\Controllers\Api\PlayerController;
 use App\Http\Controllers\Api\PlaylistController;
@@ -26,7 +27,10 @@ Route::middleware('auth.token')->group(function (): void {
     Route::apiResource('media', MediaController::class)
         ->only(['index', 'show'])
         ->parameters(['media' => 'media']);
+    Route::get('/screens/{screen}/programs', [ProgramController::class, 'screenFeed']);
+    Route::get('/programs/export/pdf', [ProgramController::class, 'exportPdf']);
     Route::apiResource('programs', ProgramController::class)->only(['index', 'show']);
+    Route::apiResource('coaches', CoachController::class)->only(['index', 'show']);
     Route::apiResource('playlists', PlaylistController::class)->only(['index', 'show']);
     Route::apiResource('playlist-items', PlaylistItemController::class)
         ->only(['index', 'show'])
@@ -45,6 +49,7 @@ Route::middleware('auth.token')->group(function (): void {
             ->parameters(['media' => 'media']);
 
         Route::apiResource('programs', ProgramController::class)->except(['index', 'show']);
+        Route::apiResource('coaches', CoachController::class)->except(['index', 'show']);
         Route::apiResource('playlists', PlaylistController::class)->except(['index', 'show']);
         Route::put('/playlists/{playlist}/items/reorder', [PlaylistController::class, 'reorderItems']);
         Route::apiResource('sports-halls', SportsHallController::class)->except(['index', 'show']);

@@ -9,15 +9,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-1: #051018;
-            --bg-2: #10364a;
-            --bg-3: #0f5c63;
-            --card: rgba(7, 20, 30, 0.72);
-            --line: rgba(255, 255, 255, 0.18);
-            --txt: #eaf6ff;
-            --soft: #9ec0d2;
-            --main: #ffb100;
-            --ok: #37d9b2;
+            --bg-1: #050505;
+            --bg-2: #0b0b0b;
+            --bg-3: #17130a;
+            --card: rgba(7, 7, 7, 0.85);
+            --line: rgba(165, 126, 28, 0.42);
+            --txt: #f8f7f2;
+            --soft: #f2d583;
+            --main: #a57e1c;
+            --ok: #f2d583;
             --font-body: "Manrope", "Trebuchet MS", sans-serif;
             --font-title: "Rajdhani", "Franklin Gothic Medium", sans-serif;
         }
@@ -32,8 +32,8 @@
             color: var(--txt);
             font-family: var(--font-body);
             background:
-                radial-gradient(circle at 12% 16%, rgba(255, 177, 0, 0.26), transparent 35%),
-                radial-gradient(circle at 84% 78%, rgba(55, 217, 178, 0.23), transparent 38%),
+                radial-gradient(circle at 12% 16%, rgba(165, 126, 28, 0.30), transparent 35%),
+                radial-gradient(circle at 84% 78%, rgba(255, 255, 255, 0.10), transparent 38%),
                 linear-gradient(145deg, var(--bg-1), var(--bg-2) 55%, var(--bg-3));
         }
 
@@ -41,7 +41,7 @@
             position: fixed;
             inset: 0;
             pointer-events: none;
-            background-image: radial-gradient(rgba(255,255,255,0.08) 0.7px, transparent 0.7px);
+            background-image: radial-gradient(rgba(165,126,28,0.11) 0.7px, transparent 0.7px);
             background-size: 3px 3px;
             opacity: 0.16;
         }
@@ -71,6 +71,7 @@
             letter-spacing: 0.05em;
             font-size: clamp(2rem, 4vw, 3.2rem);
             line-height: 1;
+            color: #ffffff;
         }
 
         .hero p {
@@ -117,13 +118,13 @@
 
         .btn:hover {
             transform: translateY(-1px);
-            border-color: rgba(255, 177, 0, 0.68);
-            background: rgba(255, 177, 0, 0.16);
+            border-color: rgba(242, 213, 131, 0.74);
+            background: rgba(165, 126, 28, 0.26);
         }
 
         .btn.alt:hover {
-            border-color: rgba(55, 217, 178, 0.65);
-            background: rgba(55, 217, 178, 0.16);
+            border-color: rgba(242, 213, 131, 0.70);
+            background: rgba(242, 213, 131, 0.14);
         }
 
         .footer {
@@ -153,13 +154,13 @@
         <article class="card">
             <h2>Connexion Admin</h2>
             <p>Acces direct avec le profil administrateur pour la gestion globale de la plateforme.</p>
-            <a class="btn" href="/admin">Ouvrir espace admin</a>
+            <a class="btn" href="{{ route('admin.portal') }}">Ouvrir espace admin</a>
         </article>
 
         <article class="card">
             <h2>Connexion Manager</h2>
             <p>Acces direct avec le profil manager pour gerer ecrans, contenus et planifications.</p>
-            <a class="btn alt" href="/admin">Ouvrir espace manager</a>
+            <a class="btn alt" href="{{ route('admin.portal') }}">Ouvrir espace manager</a>
         </article>
     </section>
 

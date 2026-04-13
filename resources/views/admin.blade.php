@@ -9,17 +9,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-1: #051018;
-            --bg-2: #10364a;
-            --bg-3: #0f5c63;
-            --panel: rgba(7, 20, 30, 0.74);
-            --line: rgba(255,255,255,0.15);
-            --txt: #eaf6ff;
-            --soft: #9ec0d2;
-            --ok: #37d9b2;
-            --err: #ff6b6b;
-            --warn: #f59e0b;
-            --main: #ffb100;
+            --bg-1: #050505;
+            --bg-2: #0b0b0b;
+            --bg-3: #17130a;
+            --panel: rgba(7, 7, 7, 0.86);
+            --line: rgba(165, 126, 28, 0.42);
+            --txt: #f8f7f2;
+            --soft: #f2d583;
+            --ok: #f2d583;
+            --err: #ff7a7a;
+            --warn: #a57e1c;
+            --main: #a57e1c;
             --font-body: "Manrope", "Trebuchet MS", sans-serif;
             --font-title: "Rajdhani", "Franklin Gothic Medium", sans-serif;
         }
@@ -27,8 +27,8 @@
         body {
             margin: 0;
             background:
-                radial-gradient(circle at 10% 14%, rgba(255,177,0,0.24), transparent 35%),
-                radial-gradient(circle at 86% 82%, rgba(55,217,178,0.2), transparent 35%),
+                radial-gradient(circle at 10% 14%, rgba(165,126,28,0.30), transparent 34%),
+                radial-gradient(circle at 88% 84%, rgba(255,255,255,0.10), transparent 34%),
                 linear-gradient(145deg, var(--bg-1), var(--bg-2) 55%, var(--bg-3));
             color: var(--txt);
             font-family: var(--font-body);
@@ -50,7 +50,7 @@
         }
         .page { width: min(1280px, 96vw); margin: 14px auto 24px; display: grid; gap: 10px; }
         .hero, .card {
-            border: 1px solid var(--line);
+            border: none;
             border-radius: 16px;
             background: var(--panel);
             padding: 12px;
@@ -61,9 +61,38 @@
             font-size: clamp(1.45rem, 2.6vw, 2.2rem);
             letter-spacing: 0.05em;
             font-family: var(--font-title);
+            color: #ffffff;
         }
         .hero p { margin: 6px 0 0; color: var(--soft); }
-        .layout { display: grid; grid-template-columns: 320px 1fr; gap: 10px; }
+        .layout { display: grid; grid-template-columns: 1fr; gap: 10px; }
+        .main-toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+        .main-toolbar-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .main-toolbar-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .main-toolbar .msg {
+            min-height: 0;
+            margin: 0;
+        }
+        .main-toolbar .btn-danger {
+            width: auto;
+            min-width: 180px;
+        }
         h2 {
             margin: 0 0 8px;
             font-size: 1.2rem;
@@ -90,7 +119,7 @@
             width: 100%;
             border: 1px solid var(--line);
             border-radius: 10px;
-            background: #071826;
+            background: #111111;
             color: var(--txt);
             padding: 8px 9px;
             font: 500 0.92rem var(--font-body);
@@ -107,14 +136,48 @@
             opacity: 1;
             cursor: pointer;
         }
-        button { cursor: pointer; }
-        .btn-main { background: rgba(255,177,0,0.24); border-color: rgba(255,177,0,0.58); }
-        .btn-ok { background: rgba(55,217,178,0.22); border-color: rgba(55,217,178,0.56); }
-        .btn-danger { background: rgba(255,107,107,0.22); border-color: rgba(255,107,107,0.56); }
-        .btn-warn { background: rgba(245,158,11,0.18); border-color: rgba(245,158,11,0.5); }
+        button {
+            cursor: pointer;
+            background: rgba(165,126,28,0.16);
+            color: #f2d583;
+            border-color: rgba(165,126,28,0.62);
+            font-weight: 700;
+        }
+        button:hover {
+            background: rgba(165,126,28,0.26);
+            color: #ffffff;
+        }
+        .btn-main, .btn-ok, .btn-warn {
+            background: #f8f4e8;
+            color: #000000;
+            border-color: rgba(165,126,28,0.72);
+        }
+        .btn-main:hover, .btn-ok:hover, .btn-warn:hover {
+            background: #ffffff;
+            color: #000000;
+        }
+        .btn-danger {
+            background: rgba(120,35,35,0.34);
+            color: #ffdede;
+            border-color: rgba(207,104,104,0.58);
+        }
+        .btn-danger:hover {
+            background: rgba(140,45,45,0.42);
+            color: #ffffff;
+        }
         .tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
-        .tabs button { width: auto; }
-        .tabs button.active { border-color: rgba(55,217,178,0.72); background: rgba(55,217,178,0.2); }
+        .tabs button {
+            width: auto;
+            background: #111111;
+            color: #f2d583;
+            border-color: rgba(165,126,28,0.62);
+        }
+        .tabs button.active {
+            border-color: #f2d583;
+            background: #f8f4e8;
+            color: #000000;
+            box-shadow: 0 0 0 1px #f2d583 inset;
+        }
         .panel { display: none; gap: 9px; }
         .panel.active { display: grid; }
         .msg { min-height: 18px; color: var(--soft); font-size: 0.9rem; }
@@ -124,9 +187,131 @@
         .pill { display: inline-block; border: 1px solid var(--line); border-radius: 999px; padding: 3px 8px; font-size: 0.78rem; }
         .note { color: var(--soft); font-size: 0.85rem; line-height: 1.4; border-top: 1px dashed var(--line); padding-top: 7px; }
         .table-wrap { overflow: auto; border: 1px solid var(--line); border-radius: 10px; }
-        table { width: 100%; min-width: 760px; border-collapse: collapse; background: rgba(5,12,20,0.55); }
-        th, td { padding: 8px; border-bottom: 1px solid rgba(255,255,255,0.08); text-align: left; font-size: 0.9rem; }
-        th { color: var(--soft); background: rgba(0,0,0,0.18); }
+        table { width: 100%; min-width: 760px; border-collapse: collapse; background: rgba(7,7,7,0.9); }
+        th, td { padding: 8px; border-bottom: 1px solid rgba(165,126,28,0.22); text-align: left; font-size: 0.9rem; }
+        th { color: #ffffff; background: rgba(0,0,0,0.5); }
+        .planning-shell {
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            background: rgba(14, 14, 14, 0.92);
+            padding: 10px;
+        }
+        .planning-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .planning-head-main {
+            display: grid;
+            gap: 4px;
+        }
+        .planning-head h3 {
+            margin: 0;
+        }
+        .planning-caption {
+            color: var(--soft);
+            font-size: 0.86rem;
+        }
+        .planning-day-select {
+            width: auto;
+            min-width: 190px;
+        }
+        .planning-board {
+            display: grid;
+            grid-template-columns: minmax(280px, 1fr);
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 2px;
+        }
+        .planning-column {
+            min-height: 220px;
+            border: 1px solid rgba(165,126,28,0.26);
+            border-radius: 14px;
+            background:
+                linear-gradient(180deg, rgba(165,126,28,0.16), rgba(8,8,8,0.88) 22%),
+                rgba(8, 8, 8, 0.92);
+            padding: 10px;
+            display: grid;
+            align-content: start;
+            gap: 8px;
+        }
+        .planning-column h4 {
+            margin: 0;
+            font-family: var(--font-title);
+            font-size: 1rem;
+            letter-spacing: 0.04em;
+            color: #ffffff;
+        }
+        .planning-day-meta {
+            color: var(--soft);
+            font-size: 0.8rem;
+        }
+        .planning-items {
+            display: grid;
+            gap: 8px;
+        }
+        .planning-card,
+        .planning-empty {
+            border-radius: 12px;
+            padding: 10px;
+        }
+        .planning-card {
+            border: 1px solid rgba(242,213,131,0.28);
+            background: rgba(255,255,255,0.04);
+            display: grid;
+            gap: 6px;
+        }
+        .planning-card.is-inactive {
+            opacity: 0.68;
+            border-style: dashed;
+        }
+        .planning-time {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+        .planning-status {
+            display: inline-flex;
+            align-items: center;
+            border: 1px solid rgba(242,213,131,0.24);
+            border-radius: 999px;
+            padding: 2px 7px;
+            color: var(--soft);
+            font-size: 0.73rem;
+            white-space: nowrap;
+        }
+        .planning-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1.25;
+        }
+        .planning-type {
+            color: var(--soft);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+        .planning-meta {
+            color: #ece5d1;
+            font-size: 0.84rem;
+            line-height: 1.45;
+        }
+        .planning-empty {
+            min-height: 120px;
+            border: 1px dashed rgba(165,126,28,0.35);
+            display: grid;
+            place-items: center;
+            text-align: center;
+            color: rgba(242,213,131,0.74);
+            font-size: 0.86rem;
+            background: rgba(255,255,255,0.02);
+        }
         .actions { display: flex; gap: 6px; flex-wrap: wrap; }
         .actions button, .actions a {
             width: auto;
@@ -134,8 +319,8 @@
             font-size: 0.8rem;
             border: 1px solid var(--line);
             border-radius: 8px;
-            background: #071826;
-            color: var(--txt);
+            background: #111111;
+            color: #f2d583;
             text-decoration: none;
         }
         .icon-action {
@@ -151,13 +336,125 @@
             height: 16px;
             stroke: currentColor;
         }
-        .icon-action.play { color: #7ed8ff; }
-        .icon-action.edit { color: #ffd166; }
+        .icon-action.play { color: #f2d583; }
+        .icon-action.edit { color: #f2d583; }
         .icon-action.delete { color: #ff9a9a; }
-        .icon-action.stop { color: #ffb366; }
+        .icon-action.stop { color: #a57e1c; }
+        .sports-hall-coaches-field {
+            grid-column: 1 / -1;
+        }
+        .table-inline-select {
+            width: min(100%, 230px);
+            min-width: 170px;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            background: #111111;
+            color: var(--txt);
+            padding: 8px 9px;
+            font: 500 0.92rem var(--font-body);
+            appearance: auto;
+            -webkit-appearance: auto;
+            -moz-appearance: auto;
+            color-scheme: dark;
+        }
+        .table-inline-select[multiple] {
+            min-height: 70px;
+        }
+        .table-inline-select option {
+            color: var(--txt);
+            background: #111111;
+        }
+        .table-inline-select:disabled {
+            opacity: 1;
+            cursor: default;
+        }
+        .coach-select {
+            position: relative;
+            width: 100%;
+        }
+        .coach-select-native {
+            display: none;
+        }
+        .coach-select-trigger {
+            width: 100%;
+            min-height: 44px;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            background: #111111;
+            color: var(--txt);
+            padding: 8px 42px 8px 12px;
+            font: 500 0.92rem var(--font-body);
+            text-align: left;
+            position: relative;
+        }
+        .coach-select-trigger::after {
+            content: "";
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            width: 8px;
+            height: 8px;
+            border-right: 2px solid #ffffff;
+            border-bottom: 2px solid #ffffff;
+            transform: translateY(-70%) rotate(45deg);
+            transition: transform 0.18s ease;
+            pointer-events: none;
+        }
+        .coach-select.is-open .coach-select-trigger::after {
+            transform: translateY(-30%) rotate(-135deg);
+        }
+        .coach-select-dropdown {
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0;
+            right: 0;
+            display: none;
+            max-height: 240px;
+            overflow-y: auto;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            background: #111111;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.32);
+            z-index: 30;
+        }
+        .coach-select.is-open .coach-select-dropdown {
+            display: block;
+        }
+        .coach-select-option {
+            width: 100%;
+            border: 0;
+            border-radius: 0;
+            background: transparent;
+            color: var(--txt);
+            padding: 10px 12px;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            font: 500 0.92rem var(--font-body);
+        }
+        .coach-select-option:hover,
+        .coach-select-option:focus-visible {
+            background: rgba(255,255,255,0.08);
+            outline: none;
+        }
+        .coach-select-option.is-selected {
+            background: rgba(255,255,255,0.14);
+        }
+        .coach-select-option-meta {
+            color: var(--soft);
+            font-size: 0.8rem;
+            white-space: nowrap;
+        }
+        .coach-select-empty {
+            padding: 10px 12px;
+            color: var(--soft);
+            font-size: 0.88rem;
+        }
         .drag-handle { cursor: grab; font-weight: 700; color: var(--soft); }
         tr.dragging { opacity: 0.45; }
-        tr.drop-target { outline: 1px dashed rgba(255,183,3,0.8); outline-offset: -2px; }
+        tr.drop-target { outline: 1px dashed rgba(242,213,131,0.88); outline-offset: -2px; }
         @media (max-width: 1000px) {
             .layout { grid-template-columns: 1fr; }
             .grid-2, .grid-3 { grid-template-columns: 1fr; }
@@ -186,55 +483,39 @@
 <div id="app-view" class="page" style="display:none;">
     <section class="hero">
         <h1>Plateforme d'affichage multimedia - Clubs sportifs</h1>
-        <p>Workflow: media -> playlist -> items -> ecran -> player</p>
     </section>
 
     <section class="layout">
-        <aside class="card">
-            <h2>Session Dashboard</h2>
-            <div class="stack">
-                <p id="session-user"><span class="pill">Verification session...</span></p>
-                <button id="btn-logout" class="btn-danger">Se deconnecter</button>
-                <p class="note" style="margin:0;border-top:none;padding-top:0;">Mode SPA actif: login + dashboard sans changement de page.</p>
-            </div>
-            <p id="global-msg" class="msg"></p>
-            <p class="note">
-                1) Upload media<br>
-                2) Creer playlist<br>
-                3) Ajouter items + drag/drop<br>
-                4) Affecter playlist a ecran<br>
-                5) Ouvrir player
-            </p>
-        </aside>
-
         <main class="card">
+            <div class="main-toolbar">
+                <div class="main-toolbar-left">
+                    <p id="session-user"><span class="pill">Verification session...</span></p>
+                    <p id="global-msg" class="msg"></p>
+                </div>
+                <div class="main-toolbar-right">
+                    <button id="btn-logout" class="btn-danger">Se deconnecter</button>
+                </div>
+            </div>
             <div class="tabs">
                 <button class="tab-btn active" data-tab="screens">Ecrans</button>
                 <button class="tab-btn" data-tab="assignments">Affectations</button>
                 <button class="tab-btn" data-tab="sports-halls">Salles sport</button>
-                <button class="tab-btn" data-tab="ads">Publicites</button>
                 <button class="tab-btn" data-tab="media">Medias</button>
                 <button class="tab-btn" data-tab="programs">Programmes</button>
+                <button class="tab-btn" data-tab="coaches">Coachs</button>
                 <button class="tab-btn" data-tab="playlists">Playlists</button>
                 <button class="tab-btn" data-tab="items">Items playlist</button>
                 <button class="tab-btn" data-tab="users">Utilisateurs</button>
             </div>
 
             <section id="panel-screens" class="panel active">
-                <h2>Ecrans (CRUD)</h2>
+                <h2>Ecrans </h2>
                 <div class="grid-2">
                     <input id="screen-name" placeholder="Nom ecran">
-                    <select id="screen-emplacement">
-                        <option value="">Selectionner emplacement</option>
-                        <option value="entree">Entree</option>
-                        <option value="sortie">Sortie</option>
-                        <option value="cafeteria">Cafeteria</option>
-                    </select>
                     <select id="screen-sports-hall-id"><option value="">Selectionner salle de sport</option></select>
                     <select id="screen-status">
                         <option value="offline">offline</option>
                         <option value="online">online</option>
-                        <option value="maintenance">maintenance</option>
                     </select>
                 </div>
                 <div class="grid-2">
@@ -271,13 +552,24 @@
                 <h2>Salles de sport (CRUD)</h2>
                 <div class="grid-3">
                     <input id="sports-hall-name" placeholder="Nom salle de sport">
-                    <input id="sports-hall-matricule" placeholder="Matricule">
+                    <input id="sports-hall-matricule" placeholder="Matricule auto" readonly>
                     <input id="sports-hall-localisation" placeholder="Localisation">
+                    <div class="sports-hall-coaches-field">
+                        <label for="sports-hall-coach-ids">Selectionner les coachs de la salle</label>
+                        <div id="sports-hall-coach-picker" class="coach-select">
+                            <button id="sports-hall-coach-trigger" type="button" class="coach-select-trigger" aria-haspopup="listbox" aria-expanded="false">
+                                Selectionner les coachs
+                            </button>
+                            <div id="sports-hall-coach-dropdown" class="coach-select-dropdown" role="listbox" aria-multiselectable="true"></div>
+                            <select id="sports-hall-coach-ids" class="coach-select-native" multiple></select>
+                        </div>
+                    </div>
                 </div>
                 <div class="grid-2">
                     <button id="btn-save-sports-hall" class="btn-main">Ajouter salle de sport</button>
                     <button id="btn-cancel-sports-hall" class="btn-warn">Annuler edition</button>
                 </div>
+                <p class="note">Le matricule se genere automatiquement. Clique sur le select coachs pour ouvrir la liste et choisir plusieurs coachs.</p>
                 <p id="sports-hall-msg" class="msg"></p>
                 <div class="table-wrap"><table id="table-sports-halls"></table></div>
             </section>
@@ -317,26 +609,64 @@
                     <button id="btn-save-media" class="btn-main">Uploader media</button>
                     <button id="btn-cancel-media" class="btn-warn">Annuler edition</button>
                 </div>
-                <p class="note">En edition, le fichier est optionnel.</p>
+                <p class="note">En edition, le fichier est optionnel. Image max 1 Mo. Video max 5 minutes.</p>
                 <p id="media-msg" class="msg"></p>
                 <div class="table-wrap"><table id="table-media"></table></div>
             </section>
 
             <section id="panel-programs" class="panel">
-                <h2>Programmes (CRUD)</h2>
+                <h2>Programmes (planning)</h2>
                 <div class="grid-3">
-                    <input id="program-day" placeholder="Jour">
+                    <input id="program-title" placeholder="Titre du cours">
+                    <input id="program-course-type" placeholder="Type de cours">
+                    <select id="program-day">
+                        <option value="lundi">Lundi</option>
+                        <option value="mardi">Mardi</option>
+                        <option value="mercredi">Mercredi</option>
+                        <option value="jeudi">Jeudi</option>
+                        <option value="vendredi">Vendredi</option>
+                        <option value="samedi">Samedi</option>
+                        <option value="dimanche">Dimanche</option>
+                    </select>
                     <input id="program-start-time" type="time">
-                    <input id="program-end-time" type="time">
-                    <input id="program-coach" placeholder="Coach">
+                    <input id="program-duration" type="number" min="15" max="240" step="15" placeholder="Duree (minutes)">
+                    <select id="program-screen-id"><option value="">Ecran associe (optionnel)</option></select>
+                    <input id="program-coach" list="program-coach-suggestions" placeholder="Coach">
                     <input id="program-room" placeholder="Salle">
+                    <input id="program-display-order" type="number" min="1" placeholder="Ordre affichage">
+                    <select id="program-is-active">
+                        <option value="1">Actif</option>
+                        <option value="0">Inactif</option>
+                    </select>
                 </div>
+                <datalist id="program-coach-suggestions"></datalist>
                 <div class="grid-2">
                     <button id="btn-save-program" class="btn-main">Ajouter programme</button>
                     <button id="btn-cancel-program" class="btn-warn">Annuler edition</button>
                 </div>
+                <p class="note">L heure de fin est calculee automatiquement a partir de l heure de debut et de la duree.</p>
                 <p id="program-msg" class="msg"></p>
                 <div class="table-wrap"><table id="table-programs"></table></div>
+            </section>
+
+            <section id="panel-coaches" class="panel">
+                <h2>Coachs (CRUD)</h2>
+                <div class="grid-3">
+                    <input id="coach-name" placeholder="Nom coach">
+                    <input id="coach-email" type="email" placeholder="Email (optionnel)">
+                    <input id="coach-first-name" placeholder="Prenom (optionnel)">
+                    <input id="coach-specialty" placeholder="Specialite (optionnel)">
+                    <select id="coach-is-active">
+                        <option value="1">Actif</option>
+                        <option value="0">Inactif</option>
+                    </select>
+                </div>
+                <div class="grid-2">
+                    <button id="btn-save-coach" class="btn-main">Ajouter coach</button>
+                    <button id="btn-cancel-coach" class="btn-warn">Annuler edition</button>
+                </div>
+                <p id="coach-msg" class="msg"></p>
+                <div class="table-wrap"><table id="table-coaches"></table></div>
             </section>
 
             <section id="panel-playlists" class="panel">
@@ -402,6 +732,7 @@ const state = {
     adSchedules: [],
     media: [],
     programs: [],
+    coaches: [],
     playlists: [],
     playlistItems: [],
     users: [],
@@ -411,6 +742,7 @@ const state = {
         adScheduleId: null,
         mediaId: null,
         programId: null,
+        coachId: null,
         playlistId: null,
         assignmentId: null,
         itemId: null,
@@ -418,6 +750,12 @@ const state = {
     },
     draggingItemId: null,
 };
+const STATUS_AUTO_REFRESH_MS = 7000;
+const PROGRAM_PLANNING_REFRESH_MS = 4 * 60 * 60 * 1000;
+let statusRefreshHandle = null;
+let statusRefreshInFlight = false;
+let programPlanningRefreshHandle = null;
+let programPlanningRefreshInFlight = false;
 
 const refs = {
     authView: document.getElementById('auth-view'),
@@ -439,6 +777,7 @@ const refs = {
         ads: document.getElementById('ad-msg'),
         media: document.getElementById('media-msg'),
         programs: document.getElementById('program-msg'),
+        coaches: document.getElementById('coach-msg'),
         playlists: document.getElementById('playlist-msg'),
         items: document.getElementById('item-msg'),
         users: document.getElementById('user-msg'),
@@ -450,6 +789,7 @@ const refs = {
         ads: document.getElementById('table-ads'),
         media: document.getElementById('table-media'),
         programs: document.getElementById('table-programs'),
+        coaches: document.getElementById('table-coaches'),
         playlists: document.getElementById('table-playlists'),
         items: document.getElementById('table-items'),
         users: document.getElementById('table-users'),
@@ -552,6 +892,11 @@ function formatDateTime(value) {
     return parsed.toLocaleString();
 }
 
+function formatTimeValue(value) {
+    if (!value) return '-';
+    return String(value).slice(0, 5);
+}
+
 function normalizeAssignmentStatus(assignment) {
     const raw = String(assignment.runtime_status ?? '').toLowerCase();
     if (raw === 'running' || raw === 'planned' || raw === 'expired') return raw;
@@ -594,6 +939,9 @@ function syncSharedSelectors() {
     const itemMedia = document.getElementById('item-media-id');
     const adScreen = document.getElementById('ad-screen-id');
     const adMedia = document.getElementById('ad-media-id');
+    const programScreen = document.getElementById('program-screen-id');
+    const programCoachSuggestions = document.getElementById('program-coach-suggestions');
+    const sportsHallCoachIds = document.getElementById('sports-hall-coach-ids');
 
     const oldScreenSportsHall = screenSportsHall.value;
     const oldAssignScreen = assignScreen.value;
@@ -602,6 +950,8 @@ function syncSharedSelectors() {
     const oldItemMedia = itemMedia.value;
     const oldAdScreen = adScreen.value;
     const oldAdMedia = adMedia.value;
+    const oldProgramScreen = programScreen.value;
+    const oldSportsHallCoachIds = Array.from(sportsHallCoachIds?.selectedOptions ?? []).map((option) => option.value);
 
     screenSportsHall.innerHTML = '<option value="">Selectionner salle de sport</option>' +
         state.sportsHalls.map((hall) => `<option value="${hall.id}">${hall.name} (${hall.matricule})</option>`).join('');
@@ -619,8 +969,20 @@ function syncSharedSelectors() {
     adScreen.innerHTML = '<option value="">Selectionner ecran</option>' +
         state.screens.map((s) => `<option value="${s.id}">${s.name} (${s.device_key})</option>`).join('');
 
+    programScreen.innerHTML = '<option value="">Ecran associe (optionnel)</option>' +
+        state.screens.map((s) => `<option value="${s.id}">${s.name} (${s.device_key})</option>`).join('');
+
     adMedia.innerHTML = '<option value="">Selectionner media publicite</option>' +
         state.media.map((m) => `<option value="${m.id}">#${m.id} - ${m.title} (${m.type})</option>`).join('');
+
+    sportsHallCoachIds.innerHTML = state.coaches
+        .map((coach) => `<option value="${coach.id}">${coachDisplayName(coach)}</option>`)
+        .join('');
+
+    programCoachSuggestions.innerHTML = state.coaches
+        .filter((coach) => coach.is_active)
+        .map((coach) => `<option value="${coachDisplayName(coach)}"></option>`)
+        .join('');
 
     if (oldScreenSportsHall && state.sportsHalls.some((hall) => String(hall.id) === String(oldScreenSportsHall))) screenSportsHall.value = oldScreenSportsHall;
     if (oldAssignScreen && state.screens.some((s) => String(s.id) === String(oldAssignScreen))) assignScreen.value = oldAssignScreen;
@@ -628,7 +990,9 @@ function syncSharedSelectors() {
     if (oldItemsPlaylist && state.playlists.some((p) => String(p.id) === String(oldItemsPlaylist))) itemsPlaylist.value = oldItemsPlaylist;
     if (oldItemMedia && state.media.some((m) => String(m.id) === String(oldItemMedia))) itemMedia.value = oldItemMedia;
     if (oldAdScreen && state.screens.some((s) => String(s.id) === String(oldAdScreen))) adScreen.value = oldAdScreen;
+    if (oldProgramScreen && state.screens.some((s) => String(s.id) === String(oldProgramScreen))) programScreen.value = oldProgramScreen;
     if (oldAdMedia && state.media.some((m) => String(m.id) === String(oldAdMedia))) adMedia.value = oldAdMedia;
+    setSelectedSportsHallCoachIds(oldSportsHallCoachIds);
 }
 
 function renderTable(el, headers, rows) {
@@ -642,6 +1006,259 @@ function renderTable(el, headers, rows) {
     el.innerHTML = `${head}${body}`;
 }
 
+function buildEditAction(action, id, label = 'Modifier') {
+    return `
+        <button data-action="${action}" data-id="${id}" class="icon-action edit" title="${label}" aria-label="${label}">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                <path d="M12 20h9"></path>
+                <path d="M16.5 3.5a2.12 2.12 0 1 1 3 3L7 19l-4 1 1-4 12.5-12.5z"></path>
+            </svg>
+        </button>
+    `;
+}
+
+function buildDeleteAction(action, id, label = 'Supprimer') {
+    return `
+        <button data-action="${action}" data-id="${id}" class="icon-action delete" title="${label}" aria-label="${label}">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                <polyline points="3,6 5,6 21,6"></polyline>
+                <path d="M8 6V4h8v2"></path>
+                <path d="M19 6l-1 14H6L5 6"></path>
+                <line x1="10" y1="11" x2="10" y2="17"></line>
+                <line x1="14" y1="11" x2="14" y2="17"></line>
+            </svg>
+        </button>
+    `;
+}
+
+function readVideoDuration(file) {
+    return new Promise((resolve, reject) => {
+        const video = document.createElement('video');
+        const objectUrl = URL.createObjectURL(file);
+
+        const cleanup = () => {
+            URL.revokeObjectURL(objectUrl);
+            video.removeAttribute('src');
+            video.load();
+        };
+
+        video.preload = 'metadata';
+        video.onloadedmetadata = () => {
+            const duration = Number(video.duration);
+            cleanup();
+
+            if (!Number.isFinite(duration) || duration <= 0) {
+                reject(new Error('Impossible de lire la duree de la video.'));
+                return;
+            }
+
+            resolve(Math.ceil(duration));
+        };
+        video.onerror = () => {
+            cleanup();
+            reject(new Error('Impossible de lire les metadonnees de la video.'));
+        };
+        video.src = objectUrl;
+    });
+}
+
+function inferMediaType(file, selectedType = '') {
+    const mimeType = String(file?.type || '').toLowerCase();
+
+    if (mimeType.startsWith('image/')) return 'image';
+    if (mimeType.startsWith('video/')) return 'video';
+
+    const extension = String(file?.name || '').toLowerCase().split('.').pop();
+    const imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'bmp', 'svg'];
+    const videoExtensions = ['mp4', 'mov', 'avi', 'webm', 'mkv', 'm4v', 'mpeg', 'mpg'];
+
+    if (imageExtensions.includes(extension)) return 'image';
+    if (videoExtensions.includes(extension)) return 'video';
+
+    return selectedType || '';
+}
+
+function escapeHtml(value) {
+    return String(value ?? '')
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#39;');
+}
+
+function getSelectedSportsHallCoachIds() {
+    return Array.from(document.getElementById('sports-hall-coach-ids').selectedOptions).map((option) => Number(option.value));
+}
+
+function updateSportsHallCoachTriggerLabel() {
+    const trigger = document.getElementById('sports-hall-coach-trigger');
+    if (!trigger) {
+        return;
+    }
+
+    const selectedCoaches = state.coaches.filter((coach) => getSelectedSportsHallCoachIds().includes(Number(coach.id)));
+
+    if (!selectedCoaches.length) {
+        trigger.textContent = 'Selectionner les coachs';
+        return;
+    }
+
+    if (selectedCoaches.length === 1) {
+        trigger.textContent = coachDisplayName(selectedCoaches[0]);
+        return;
+    }
+
+    trigger.textContent = `${selectedCoaches.length} coachs selectionnes`;
+}
+
+function setSportsHallCoachDropdownOpen(isOpen) {
+    const picker = document.getElementById('sports-hall-coach-picker');
+    const trigger = document.getElementById('sports-hall-coach-trigger');
+
+    if (!picker || !trigger) {
+        return;
+    }
+
+    picker.classList.toggle('is-open', isOpen);
+    trigger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+}
+
+function setSelectedSportsHallCoachIds(ids) {
+    const normalizedIds = ids.map((id) => String(id));
+
+    Array.from(document.getElementById('sports-hall-coach-ids').options).forEach((option) => {
+        option.selected = normalizedIds.includes(option.value);
+    });
+
+    renderSportsHallCoachDropdown();
+    updateSportsHallCoachTriggerLabel();
+}
+
+function renderSportsHallCoachDropdown() {
+    const select = document.getElementById('sports-hall-coach-ids');
+    const dropdown = document.getElementById('sports-hall-coach-dropdown');
+
+    if (!select || !dropdown) {
+        return;
+    }
+
+    const selectedIds = getSelectedSportsHallCoachIds().map((id) => String(id));
+
+    if (!select.options.length) {
+        dropdown.innerHTML = '<div class="coach-select-empty">Aucun coach disponible</div>';
+        return;
+    }
+
+    dropdown.innerHTML = Array.from(select.options)
+        .map((option) => {
+            const coach = state.coaches.find((item) => String(item.id) === option.value);
+            const hallName = coach?.sports_hall?.name ? escapeHtml(coach.sports_hall.name) : '';
+            const isSelected = selectedIds.includes(option.value);
+
+            return `
+                <button type="button" class="coach-select-option ${isSelected ? 'is-selected' : ''}" data-coach-option-id="${option.value}" role="option" aria-selected="${isSelected ? 'true' : 'false'}">
+                    <span>${escapeHtml(option.textContent)}</span>
+                    <span class="coach-select-option-meta">${hallName || (isSelected ? 'Selectionne' : '')}</span>
+                </button>
+            `;
+        })
+        .join('');
+}
+
+function coachDisplayName(coach) {
+    const firstName = String(coach?.first_name || '').trim();
+    const lastName = String(coach?.name || '').trim();
+
+    if (firstName && lastName && !lastName.toLowerCase().includes(firstName.toLowerCase())) {
+        return `${firstName} ${lastName}`;
+    }
+
+    return lastName || firstName || '-';
+}
+
+function buildCoachPreviewSelect(coaches) {
+    const items = Array.isArray(coaches) ? coaches : [];
+
+    if (!items.length) {
+        return '<select class="table-inline-select" disabled><option>Aucun coach</option></select>';
+    }
+
+    const options = items
+        .map((coach) => `<option>${escapeHtml(coachDisplayName(coach))}</option>`)
+        .join('');
+
+    return `
+        <select class="table-inline-select" aria-label="Liste des coachs de la salle">
+            <option selected>${items.length} coach${items.length > 1 ? 's' : ''}</option>
+            ${options}
+        </select>
+    `;
+}
+
+function buildSportsHallMatriculeFromName(name) {
+    const base = String(name || '')
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-zA-Z0-9]/g, '')
+        .toUpperCase()
+        .slice(0, 10);
+
+    return `SH-${base || 'SALLE'}`;
+}
+
+function updateSportsHallMatricule() {
+    const nameInput = document.getElementById('sports-hall-name');
+    const matriculeInput = document.getElementById('sports-hall-matricule');
+
+    if (!nameInput || !matriculeInput) {
+        return;
+    }
+
+    matriculeInput.value = buildSportsHallMatriculeFromName(nameInput.value);
+}
+
+function syncMediaDurationInput() {
+    const mediaType = document.getElementById('media-type')?.value || 'image';
+    const durationInput = document.getElementById('media-duration');
+
+    if (!durationInput) {
+        return;
+    }
+
+    if (mediaType === 'video') {
+        durationInput.placeholder = 'Duree video (sec, max 300)';
+        durationInput.max = '300';
+        return;
+    }
+
+    durationInput.placeholder = 'Duree image (sec)';
+    durationInput.removeAttribute('max');
+}
+
+async function populateMediaDurationFromFile() {
+    const file = document.getElementById('media-file')?.files?.[0];
+    const selectedType = document.getElementById('media-type')?.value || '';
+    const durationInput = document.getElementById('media-duration');
+
+    if (!file || !durationInput || String(durationInput.value || '').trim() !== '') {
+        return;
+    }
+
+    const detectedType = inferMediaType(file, selectedType);
+
+    if (detectedType !== 'video') {
+        return;
+    }
+
+    try {
+        const duration = await readVideoDuration(file);
+        durationInput.value = String(duration);
+    } catch {
+        // L'utilisateur pourra saisir la duree manuellement.
+    }
+}
+
 function renderAllTables() {
     renderTable(refs.table.screens, ['Info'], [{ cells: ['Aucune donnee'] }]);
     renderTable(refs.table.assignments, ['Info'], [{ cells: ['Aucune donnee'] }]);
@@ -649,23 +1266,25 @@ function renderAllTables() {
     renderTable(refs.table.ads, ['Info'], [{ cells: ['Aucune donnee'] }]);
     renderTable(refs.table.media, ['Info'], [{ cells: ['Aucune donnee'] }]);
     renderTable(refs.table.programs, ['Info'], [{ cells: ['Aucune donnee'] }]);
+    renderTable(refs.table.coaches, ['Info'], [{ cells: ['Aucune donnee'] }]);
     renderTable(refs.table.playlists, ['Info'], [{ cells: ['Aucune donnee'] }]);
     renderTable(refs.table.items, ['Info'], [{ cells: ['Aucune donnee'] }]);
     renderTable(refs.table.users, ['Info'], [{ cells: ['Aucune donnee'] }]);
 }
 
 function resetForms() {
-    state.editing = { screenId: null, sportsHallId: null, adScheduleId: null, mediaId: null, programId: null, playlistId: null, assignmentId: null, itemId: null, userId: null };
+    state.editing = { screenId: null, sportsHallId: null, adScheduleId: null, mediaId: null, programId: null, coachId: null, playlistId: null, assignmentId: null, itemId: null, userId: null };
 
     document.getElementById('screen-name').value = '';
-    document.getElementById('screen-emplacement').value = '';
     document.getElementById('screen-sports-hall-id').value = '';
     document.getElementById('screen-status').value = 'offline';
     document.getElementById('btn-save-screen').textContent = 'Ajouter ecran';
 
     document.getElementById('sports-hall-name').value = '';
-    document.getElementById('sports-hall-matricule').value = '';
+    document.getElementById('sports-hall-matricule').value = buildSportsHallMatriculeFromName('');
     document.getElementById('sports-hall-localisation').value = '';
+    setSelectedSportsHallCoachIds([]);
+    setSportsHallCoachDropdownOpen(false);
     document.getElementById('btn-save-sports-hall').textContent = 'Ajouter salle de sport';
 
     document.getElementById('ad-name').value = '';
@@ -688,13 +1307,26 @@ function resetForms() {
     document.getElementById('media-duration').value = '';
     document.getElementById('media-file').value = '';
     document.getElementById('btn-save-media').textContent = 'Uploader media';
+    syncMediaDurationInput();
 
-    document.getElementById('program-day').value = '';
+    document.getElementById('program-title').value = '';
+    document.getElementById('program-course-type').value = '';
+    document.getElementById('program-day').value = 'lundi';
     document.getElementById('program-start-time').value = '';
-    document.getElementById('program-end-time').value = '';
+    document.getElementById('program-duration').value = '60';
+    document.getElementById('program-screen-id').value = '';
     document.getElementById('program-coach').value = '';
     document.getElementById('program-room').value = '';
+    document.getElementById('program-display-order').value = '1';
+    document.getElementById('program-is-active').value = '1';
     document.getElementById('btn-save-program').textContent = 'Ajouter programme';
+
+    document.getElementById('coach-name').value = '';
+    document.getElementById('coach-email').value = '';
+    document.getElementById('coach-first-name').value = '';
+    document.getElementById('coach-specialty').value = '';
+    document.getElementById('coach-is-active').value = '1';
+    document.getElementById('btn-save-coach').textContent = 'Ajouter coach';
 
     document.getElementById('playlist-name').value = '';
     document.getElementById('btn-save-playlist').textContent = 'Creer playlist';
@@ -714,6 +1346,72 @@ function resetForms() {
 function switchSpaView(isAuthenticated) {
     refs.authView.style.display = isAuthenticated ? 'none' : 'grid';
     refs.appView.style.display = isAuthenticated ? 'grid' : 'none';
+
+    if (isAuthenticated) {
+        startLiveStatusRefresh();
+        startProgramPlanningRefresh();
+    } else {
+        stopLiveStatusRefresh();
+        stopProgramPlanningRefresh();
+    }
+}
+
+function stopLiveStatusRefresh() {
+    if (statusRefreshHandle) {
+        clearInterval(statusRefreshHandle);
+        statusRefreshHandle = null;
+    }
+    statusRefreshInFlight = false;
+}
+
+function startLiveStatusRefresh() {
+    if (statusRefreshHandle) return;
+
+    refreshLiveStatus();
+    statusRefreshHandle = setInterval(() => {
+        refreshLiveStatus();
+    }, STATUS_AUTO_REFRESH_MS);
+}
+
+async function refreshLiveStatus() {
+    if (!state.token || statusRefreshInFlight) return;
+
+    statusRefreshInFlight = true;
+    try {
+        await Promise.allSettled([loadScreens(true), loadAssignments(true)]);
+    } finally {
+        statusRefreshInFlight = false;
+    }
+}
+
+function stopProgramPlanningRefresh() {
+    if (programPlanningRefreshHandle) {
+        clearInterval(programPlanningRefreshHandle);
+        programPlanningRefreshHandle = null;
+    }
+
+    programPlanningRefreshInFlight = false;
+}
+
+function startProgramPlanningRefresh() {
+    if (programPlanningRefreshHandle) return;
+
+    programPlanningRefreshHandle = setInterval(() => {
+        refreshProgramPlanning();
+    }, PROGRAM_PLANNING_REFRESH_MS);
+}
+
+async function refreshProgramPlanning() {
+    if (!state.token || programPlanningRefreshInFlight) return;
+
+    programPlanningRefreshInFlight = true;
+
+    try {
+        await loadPrograms();
+        setMessage(refs.msg.programs, `Programmes actualises automatiquement (${new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}).`, 'ok');
+    } finally {
+        programPlanningRefreshInFlight = false;
+    }
 }
 
 function setTwoFactorMode(enabled) {
@@ -771,7 +1469,11 @@ async function loadMe() {
 }
 
 async function login() {
-    setTwoFactorMode(false);
+    if (state.authChallenge?.challengeToken) {
+        setMessage(refs.authMsg, 'Un code OTP est deja actif. Utilise le dernier code recu ou clique sur "Renvoyer OTP".', 'warn');
+        refs.authOtp.focus();
+        return;
+    }
 
     try {
         const payload = await api('/login', {
@@ -799,9 +1501,12 @@ async function login() {
             expiresAt: payload.expires_at,
         };
         setTwoFactorMode(true);
+        refs.authOtp.focus();
 
-        const otpInfo = payload.debug_otp ? ` Code dev: ${payload.debug_otp}` : '';
-        setMessage(refs.authMsg, `Code OTP envoye. Verifie ta boite mail.${otpInfo}`, 'warn');
+        const otpMessage = payload.otp_already_sent
+            ? 'Code OTP deja envoye. Utilise le dernier code recu.'
+            : 'Code OTP envoye. Verifie ta boite mail.';
+        setMessage(refs.authMsg, otpMessage, 'warn');
     } catch (error) {
         setMessage(refs.authMsg, error.message, 'error');
     }
@@ -834,7 +1539,7 @@ async function verifyOtp() {
         await completeAuthenticatedSession(payload);
     } catch (error) {
         const help = error.message === 'Invalid OTP code.'
-            ? "Invalid OTP code. Utilise le dernier code recu, sans recliquer sur 'Connexion'."
+            ? "Code OTP invalide. Utilise le dernier code recu, sans recliquer sur 'Connexion'."
             : error.message;
         setMessage(refs.authMsg, help, 'error');
     }
@@ -854,8 +1559,7 @@ async function resendOtp() {
             },
         });
 
-        const otpInfo = payload.debug_otp ? ` Code dev: ${payload.debug_otp}` : '';
-        setMessage(refs.authMsg, `Nouveau code OTP envoye.${otpInfo}`, 'ok');
+        setMessage(refs.authMsg, 'Nouveau code OTP envoye.', 'ok');
     } catch (error) {
         setMessage(refs.authMsg, error.message, 'error');
     }
@@ -876,6 +1580,7 @@ async function logout() {
     state.adSchedules = [];
     state.media = [];
     state.programs = [];
+    state.coaches = [];
     state.playlists = [];
     state.playlistItems = [];
     state.users = [];
@@ -888,7 +1593,7 @@ async function logout() {
     setMessage(refs.authMsg, 'Session fermee.', 'ok');
     switchSpaView(false);
 }
-async function loadScreens() {
+async function loadScreens(silent = false) {
     try {
         const payload = await api('/screens');
         state.screens = extractRows(payload);
@@ -898,17 +1603,17 @@ async function loadScreens() {
             cells: [
                 s.id,
                 s.name,
-                s.emplacement ?? '-',
                 s.sports_hall?.name ?? '-',
                 s.sports_hall?.localisation ?? '-',
                 s.device_key,
                 s.status,
-                s.playlist?.name ?? '-',
                 `<div class="actions">
                     <button data-action="screen-player" data-id="${s.id}" class="icon-action play" title="Ouvrir player" aria-label="Ouvrir player">
                         <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polygon points="8,5 19,12 8,19"></polygon></svg>
                     </button>
-                    <button data-action="screen-choose" data-id="${s.id}">Choisir</button>
+                    <button data-action="screen-planning" data-id="${s.id}" class="icon-action play" title="Ouvrir planning ecran" aria-label="Ouvrir planning ecran">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="4" width="18" height="17" rx="2"></rect><line x1="8" y1="2.5" x2="8" y2="6"></line><line x1="16" y1="2.5" x2="16" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line><line x1="8" y1="14" x2="8" y2="18"></line><line x1="12" y1="14" x2="12" y2="18"></line><line x1="16" y1="14" x2="16" y2="18"></line></svg>
+                    </button>
                     <button data-action="screen-edit" data-id="${s.id}" class="icon-action edit" title="Modifier ecran" aria-label="Modifier ecran">
                         <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.12 2.12 0 1 1 3 3L7 19l-4 1 1-4 12.5-12.5z"></path></svg>
                     </button>
@@ -919,10 +1624,14 @@ async function loadScreens() {
             ],
         }));
 
-        renderTable(refs.table.screens, ['ID', 'Nom', 'Emplacement', 'Salle sport', 'Localisation', 'Device key (auto)', 'Status', 'Playlist active', 'Action'], rows);
-        setMessage(refs.msg.screens, `${state.screens.length} ecrans charges.`, 'ok');
+        renderTable(refs.table.screens, ['ID', 'Nom', 'Salle sport', 'Localisation', 'Device key (auto)', 'Status', 'Action'], rows);
+        if (!silent) {
+            setMessage(refs.msg.screens, `${state.screens.length} ecrans charges.`, 'ok');
+        }
     } catch (error) {
-        setMessage(refs.msg.screens, error.message, 'error');
+        if (!silent) {
+            setMessage(refs.msg.screens, error.message, 'error');
+        }
     }
 }
 
@@ -930,7 +1639,6 @@ async function saveScreen() {
     const id = state.editing.screenId;
     const data = {
         name: document.getElementById('screen-name').value.trim(),
-        emplacement: document.getElementById('screen-emplacement').value,
         sports_hall_id: Number(document.getElementById('screen-sports-hall-id').value),
         status: document.getElementById('screen-status').value,
     };
@@ -1010,7 +1718,7 @@ async function assignPlaylistToScreen() {
     }
 }
 
-function renderAssignmentsTable() {
+function renderAssignmentsTable(silent = false) {
     const search = document.getElementById('assignment-search').value.trim().toLowerCase();
     const filteredAssignments = search
         ? state.assignments.filter((assignment) => buildAssignmentSearchText(assignment).includes(search))
@@ -1048,20 +1756,26 @@ function renderAssignmentsTable() {
     renderTable(refs.table.assignments, ['ID', 'Ecran', 'Device key', 'Playlist', 'Debut', 'Fin', 'Statut', 'Action'], rows);
 
     if (!state.assignments.length) {
-        setMessage(refs.msg.assignments, 'Aucune affectation disponible.', 'warn');
+        if (!silent) {
+            setMessage(refs.msg.assignments, 'Aucune affectation disponible.', 'warn');
+        }
         return;
     }
 
-    setMessage(refs.msg.assignments, `${filteredAssignments.length} affectations affichees sur ${state.assignments.length}.`, 'ok');
+    if (!silent) {
+        setMessage(refs.msg.assignments, `${filteredAssignments.length} affectations affichees sur ${state.assignments.length}.`, 'ok');
+    }
 }
 
-async function loadAssignments() {
+async function loadAssignments(silent = false) {
     try {
         const payload = await api('/screen-playlists?per_page=200');
         state.assignments = extractRows(payload);
-        renderAssignmentsTable();
+        renderAssignmentsTable(silent);
     } catch (error) {
-        setMessage(refs.msg.assignments, error.message, 'error');
+        if (!silent) {
+            setMessage(refs.msg.assignments, error.message, 'error');
+        }
     }
 }
 
@@ -1112,15 +1826,16 @@ async function loadSportsHalls() {
                 hall.name,
                 hall.matricule,
                 hall.localisation,
+                buildCoachPreviewSelect(hall.coaches ?? []),
                 hall.screens_count ?? 0,
                 `<div class="actions">
-                    <button data-action="sports-hall-edit" data-id="${hall.id}" class="btn-warn">Modifier</button>
-                    <button data-action="sports-hall-delete" data-id="${hall.id}" class="btn-danger">Supprimer</button>
+                    ${buildEditAction('sports-hall-edit', hall.id, 'Modifier salle')}
+                    ${buildDeleteAction('sports-hall-delete', hall.id, 'Supprimer salle')}
                 </div>`,
             ],
         }));
 
-        renderTable(refs.table.sportsHalls, ['ID', 'Nom', 'Matricule', 'Localisation', 'Nb ecrans', 'Action'], rows);
+        renderTable(refs.table.sportsHalls, ['ID', 'Nom', 'Matricule', 'Localisation', 'Coachs', 'Nb ecrans', 'Action'], rows);
         setMessage(refs.msg.sportsHalls, `${state.sportsHalls.length} salles chargees.`, 'ok');
     } catch (error) {
         setMessage(refs.msg.sportsHalls, error.message, 'error');
@@ -1133,6 +1848,7 @@ async function saveSportsHall() {
         name: document.getElementById('sports-hall-name').value.trim(),
         matricule: document.getElementById('sports-hall-matricule').value.trim(),
         localisation: document.getElementById('sports-hall-localisation').value.trim(),
+        coach_ids: getSelectedSportsHallCoachIds(),
     };
 
     try {
@@ -1142,6 +1858,7 @@ async function saveSportsHall() {
         setMessage(refs.msg.sportsHalls, id ? 'Salle modifiee.' : 'Salle ajoutee.', 'ok');
         resetForms();
         await loadSportsHalls();
+        await loadCoaches();
         await loadScreens();
     } catch (error) {
         setMessage(refs.msg.sportsHalls, error.message, 'error');
@@ -1155,9 +1872,72 @@ async function deleteSportsHall(id) {
         await api(`/sports-halls/${id}`, { method: 'DELETE' });
         setMessage(refs.msg.sportsHalls, `Salle #${id} supprimee.`, 'ok');
         await loadSportsHalls();
+        await loadCoaches();
         await loadScreens();
     } catch (error) {
         setMessage(refs.msg.sportsHalls, error.message, 'error');
+    }
+}
+
+async function loadCoaches() {
+    try {
+        const payload = await api('/coaches');
+        state.coaches = extractRows(payload);
+        syncSharedSelectors();
+
+        const rows = state.coaches.map((coach) => ({
+            cells: [
+                coach.id,
+                coachDisplayName(coach),
+                coach.email || '-',
+                coach.specialty || '-',
+                coach.sports_hall?.name ?? '-',
+                coach.is_active ? 'Actif' : 'Inactif',
+                `<div class="actions">
+                    ${buildEditAction('coach-edit', coach.id, 'Modifier coach')}
+                    ${buildDeleteAction('coach-delete', coach.id, 'Supprimer coach')}
+                </div>`,
+            ],
+        }));
+
+        renderTable(refs.table.coaches, ['ID', 'Coach', 'Email', 'Specialite', 'Salle sport', 'Etat', 'Action'], rows);
+        setMessage(refs.msg.coaches, `${state.coaches.length} coachs charges.`, 'ok');
+    } catch (error) {
+        setMessage(refs.msg.coaches, error.message, 'error');
+    }
+}
+
+async function saveCoach() {
+    const id = state.editing.coachId;
+    const data = {
+        name: document.getElementById('coach-name').value.trim(),
+        first_name: document.getElementById('coach-first-name').value.trim() || null,
+        email: document.getElementById('coach-email').value.trim() || null,
+        specialty: document.getElementById('coach-specialty').value.trim() || null,
+        is_active: document.getElementById('coach-is-active').value === '1',
+    };
+
+    try {
+        if (id) await api(`/coaches/${id}`, { method: 'PUT', json: data });
+        else await api('/coaches', { method: 'POST', json: data });
+
+        setMessage(refs.msg.coaches, id ? 'Coach modifie.' : 'Coach ajoute.', 'ok');
+        resetForms();
+        await loadCoaches();
+    } catch (error) {
+        setMessage(refs.msg.coaches, error.message, 'error');
+    }
+}
+
+async function deleteCoach(id) {
+    if (!confirm(`Supprimer le coach #${id} ?`)) return;
+
+    try {
+        await api(`/coaches/${id}`, { method: 'DELETE' });
+        setMessage(refs.msg.coaches, `Coach #${id} supprime.`, 'ok');
+        await loadCoaches();
+    } catch (error) {
+        setMessage(refs.msg.coaches, error.message, 'error');
     }
 }
 
@@ -1178,8 +1958,8 @@ async function loadAdSchedules() {
                 ad.display_every_loops ?? 1,
                 ad.is_active ? 'active' : 'inactive',
                 `<div class="actions">
-                    <button data-action="ad-edit" data-id="${ad.id}" class="btn-warn">Modifier</button>
-                    <button data-action="ad-delete" data-id="${ad.id}" class="btn-danger">Supprimer</button>
+                    ${buildEditAction('ad-edit', ad.id, 'Modifier publicite')}
+                    ${buildDeleteAction('ad-delete', ad.id, 'Supprimer publicite')}
                 </div>`,
             ],
         }));
@@ -1247,8 +2027,8 @@ async function loadMedia() {
                 formatDateTime(m.created_at),
                 `<div class="actions">
                     <a href="${m.file_url}" target="_blank" rel="noreferrer">Voir</a>
-                    <button data-action="media-edit" data-id="${m.id}" class="btn-warn">Modifier</button>
-                    <button data-action="media-delete" data-id="${m.id}" class="btn-danger">Supprimer</button>
+                    ${buildEditAction('media-edit', m.id, 'Modifier media')}
+                    ${buildDeleteAction('media-delete', m.id, 'Supprimer media')}
                 </div>`,
             ],
         }));
@@ -1264,7 +2044,8 @@ async function saveMedia() {
     const id = state.editing.mediaId;
     const title = document.getElementById('media-title').value.trim();
     const type = document.getElementById('media-type').value;
-    const duration = document.getElementById('media-duration').value;
+    const durationInput = document.getElementById('media-duration');
+    const duration = durationInput.value.trim();
     const file = document.getElementById('media-file').files[0];
 
     if (!id && !file) {
@@ -1274,10 +2055,42 @@ async function saveMedia() {
 
     try {
         if (file) {
+            const detectedType = inferMediaType(file, type);
+
+            if (!detectedType) {
+                setMessage(refs.msg.media, 'Type de fichier media non supporte.', 'warn');
+                return;
+            }
+
+            if (detectedType === 'image' && file.size > (1024 * 1024)) {
+                setMessage(refs.msg.media, "L'image ne doit pas depasser 1 Mo.", 'warn');
+                return;
+            }
+
+            let effectiveDuration = duration !== '' ? Number(duration) : null;
+
+            if (detectedType === 'video') {
+                if (!Number.isFinite(effectiveDuration) || effectiveDuration <= 0) {
+                    try {
+                        effectiveDuration = await readVideoDuration(file);
+                        durationInput.value = String(effectiveDuration);
+                    } catch (error) {
+                        setMessage(refs.msg.media, 'Impossible de lire la duree de la video. Saisis la duree manuellement en secondes (max 300).', 'warn');
+                        return;
+                    }
+                }
+
+                if (effectiveDuration > 300) {
+                    setMessage(refs.msg.media, 'La video ne doit pas depasser 5 minutes.', 'warn');
+                    return;
+                }
+            }
+
             const formData = new FormData();
             formData.append('title', title || file.name);
-            formData.append('type', type);
-            if (duration !== '') formData.append('duration', duration);
+            formData.append('type', detectedType);
+            if (detectedType === 'video') formData.append('duration', String(effectiveDuration));
+            if (detectedType === 'image' && effectiveDuration !== null) formData.append('duration', String(effectiveDuration));
             formData.append('file', file);
 
             if (id) {
@@ -1289,6 +2102,12 @@ async function saveMedia() {
         } else {
             const data = { title, type };
             if (duration !== '') data.duration = Number(duration);
+
+            if (type === 'video' && data.duration !== undefined && data.duration > 300) {
+                setMessage(refs.msg.media, 'La video ne doit pas depasser 5 minutes.', 'warn');
+                return;
+            }
+
             await api(`/media/${id}`, { method: 'PUT', json: data });
         }
 
@@ -1319,15 +2138,26 @@ async function loadPrograms() {
 
         const rows = state.programs.map((p) => ({
             cells: [
-                p.id, p.day, p.start_time, p.end_time, p.coach, p.room,
+                p.id,
+                p.title,
+                p.course_type || '-',
+                p.day,
+                formatTimeValue(p.start_time),
+                p.computed_end_time || formatTimeValue(p.end_time),
+                p.duration,
+                p.coach,
+                p.room,
+                p.screen ? `${p.screen.name} (${p.screen.device_key})` : '-',
+                p.display_order,
+                p.is_active ? 'Oui' : 'Non',
                 `<div class="actions">
-                    <button data-action="program-edit" data-id="${p.id}" class="btn-warn">Modifier</button>
-                    <button data-action="program-delete" data-id="${p.id}" class="btn-danger">Supprimer</button>
+                    ${buildEditAction('program-edit', p.id, 'Modifier programme')}
+                    ${buildDeleteAction('program-delete', p.id, 'Supprimer programme')}
                 </div>`,
             ],
         }));
 
-        renderTable(refs.table.programs, ['ID', 'Day', 'Start', 'End', 'Coach', 'Room', 'Action'], rows);
+        renderTable(refs.table.programs, ['ID', 'Titre', 'Type', 'Jour', 'Debut', 'Fin', 'Duree', 'Coach', 'Salle', 'Ecran', 'Ordre', 'Actif', 'Action'], rows);
         setMessage(refs.msg.programs, `${state.programs.length} programmes charges.`, 'ok');
     } catch (error) {
         setMessage(refs.msg.programs, error.message, 'error');
@@ -1336,12 +2166,20 @@ async function loadPrograms() {
 
 async function saveProgram() {
     const id = state.editing.programId;
+    const duration = document.getElementById('program-duration').value;
+    const screenId = document.getElementById('program-screen-id').value;
+    const displayOrder = document.getElementById('program-display-order').value;
     const data = {
+        title: document.getElementById('program-title').value.trim(),
+        course_type: document.getElementById('program-course-type').value.trim() || null,
         day: document.getElementById('program-day').value.trim(),
         start_time: document.getElementById('program-start-time').value,
-        end_time: document.getElementById('program-end-time').value,
+        duration: Number(duration || 60),
         coach: document.getElementById('program-coach').value.trim(),
         room: document.getElementById('program-room').value.trim(),
+        screen_id: screenId ? Number(screenId) : null,
+        display_order: Number(displayOrder || 1),
+        is_active: document.getElementById('program-is-active').value === '1',
     };
 
     try {
@@ -1377,8 +2215,8 @@ async function loadPlaylists() {
                 p.id, p.name, p.items_count ?? '-',
                 `<div class="actions">
                     <button data-action="playlist-items" data-id="${p.id}" class="btn-ok">Items</button>
-                    <button data-action="playlist-edit" data-id="${p.id}" class="btn-warn">Modifier</button>
-                    <button data-action="playlist-delete" data-id="${p.id}" class="btn-danger">Supprimer</button>
+                    ${buildEditAction('playlist-edit', p.id, 'Modifier playlist')}
+                    ${buildDeleteAction('playlist-delete', p.id, 'Supprimer playlist')}
                 </div>`,
             ],
         }));
@@ -1429,8 +2267,8 @@ function renderItemsTable() {
             i.media?.type ?? '-',
             i.duration_override ?? '-',
             `<div class="actions">
-                <button data-action="item-edit" data-id="${i.id}" class="btn-warn">Modifier</button>
-                <button data-action="item-delete" data-id="${i.id}" class="btn-danger">Supprimer</button>
+                ${buildEditAction('item-edit', i.id, 'Modifier item')}
+                ${buildDeleteAction('item-delete', i.id, 'Supprimer item')}
             </div>`,
         ],
     }));
@@ -1546,8 +2384,8 @@ async function loadUsers() {
             cells: [
                 u.id, u.name, u.email, u.role,
                 `<div class="actions">
-                    <button data-action="user-edit" data-id="${u.id}" class="btn-warn">Modifier</button>
-                    <button data-action="user-delete" data-id="${u.id}" class="btn-danger">Supprimer</button>
+                    ${buildEditAction('user-edit', u.id, 'Modifier utilisateur')}
+                    ${buildDeleteAction('user-delete', u.id, 'Supprimer utilisateur')}
                 </div>`,
             ],
         }));
@@ -1605,7 +2443,7 @@ async function deleteUser(id) {
 
 async function refreshAll() {
     if (!state.token) return;
-    await Promise.allSettled([loadSportsHalls(), loadScreens(), loadAssignments(), loadAdSchedules(), loadMedia(), loadPrograms(), loadPlaylists(), loadUsers()]);
+    await Promise.allSettled([loadSportsHalls(), loadScreens(), loadAssignments(), loadAdSchedules(), loadMedia(), loadPrograms(), loadCoaches(), loadPlaylists(), loadUsers()]);
 }
 function reorderItemsByDrag(fromId, toId) {
     const fromIndex = state.playlistItems.findIndex((i) => String(i.id) === String(fromId));
@@ -1659,7 +2497,7 @@ function bindEvents() {
     document.getElementById('btn-verify-otp').addEventListener('click', verifyOtp);
     document.getElementById('btn-resend-otp').addEventListener('click', resendOtp);
     document.getElementById('auth-password').addEventListener('keydown', (event) => {
-        if (event.key === 'Enter') login();
+        if (event.key === 'Enter' && !state.authChallenge?.challengeToken) login();
     });
     document.getElementById('auth-otp').addEventListener('keydown', (event) => {
         if (event.key === 'Enter') verifyOtp();
@@ -1673,15 +2511,47 @@ function bindEvents() {
 
     document.getElementById('btn-save-sports-hall').addEventListener('click', saveSportsHall);
     document.getElementById('btn-cancel-sports-hall').addEventListener('click', resetForms);
+    document.getElementById('sports-hall-name').addEventListener('input', updateSportsHallMatricule);
+    document.getElementById('sports-hall-coach-trigger').addEventListener('click', () => {
+        const picker = document.getElementById('sports-hall-coach-picker');
+        setSportsHallCoachDropdownOpen(!picker?.classList.contains('is-open'));
+    });
+    document.getElementById('sports-hall-coach-dropdown').addEventListener('click', (event) => {
+        const option = event.target.closest('[data-coach-option-id]');
+        if (!option) return;
+
+        const optionId = String(option.dataset.coachOptionId);
+        const selectedIds = getSelectedSportsHallCoachIds().map((id) => String(id));
+        const nextIds = selectedIds.includes(optionId)
+            ? selectedIds.filter((id) => id !== optionId)
+            : [...selectedIds, optionId];
+
+        setSelectedSportsHallCoachIds(nextIds);
+    });
+    document.addEventListener('click', (event) => {
+        const picker = document.getElementById('sports-hall-coach-picker');
+        if (!picker || picker.contains(event.target)) return;
+        setSportsHallCoachDropdownOpen(false);
+    });
 
     document.getElementById('btn-save-ad').addEventListener('click', saveAdSchedule);
     document.getElementById('btn-cancel-ad').addEventListener('click', resetForms);
 
     document.getElementById('btn-save-media').addEventListener('click', saveMedia);
     document.getElementById('btn-cancel-media').addEventListener('click', resetForms);
+    document.getElementById('media-type').addEventListener('change', () => {
+        syncMediaDurationInput();
+        void populateMediaDurationFromFile();
+    });
+    document.getElementById('media-file').addEventListener('change', () => {
+        void populateMediaDurationFromFile();
+    });
 
     document.getElementById('btn-save-program').addEventListener('click', saveProgram);
     document.getElementById('btn-cancel-program').addEventListener('click', resetForms);
+
+    document.getElementById('btn-save-coach').addEventListener('click', saveCoach);
+    document.getElementById('btn-cancel-coach').addEventListener('click', resetForms);
 
     document.getElementById('btn-save-playlist').addEventListener('click', savePlaylist);
     document.getElementById('btn-cancel-playlist').addEventListener('click', resetForms);
@@ -1702,15 +2572,11 @@ function bindEvents() {
         const record = state.screens.find((s) => String(s.id) === String(id));
 
         if (action === 'screen-player' && record) window.open(`/player/${encodeURIComponent(record.device_key)}`, '_blank');
-        if (action === 'screen-choose') {
-            document.getElementById('assign-screen-id').value = id;
-            loadAssignments();
-        }
+        if (action === 'screen-planning' && record) window.open(`/player/${encodeURIComponent(record.device_key)}?mode=planning`, '_blank');
         if (action === 'screen-delete') deleteScreen(id);
         if (action === 'screen-edit' && record) {
             state.editing.screenId = record.id;
             document.getElementById('screen-name').value = record.name;
-            document.getElementById('screen-emplacement').value = record.emplacement ?? '';
             document.getElementById('screen-sports-hall-id').value = String(record.sports_hall_id ?? '');
             document.getElementById('screen-status').value = record.status;
             document.getElementById('btn-save-screen').textContent = `Enregistrer ecran #${record.id}`;
@@ -1763,6 +2629,8 @@ function bindEvents() {
             document.getElementById('sports-hall-name').value = record.name;
             document.getElementById('sports-hall-matricule').value = record.matricule;
             document.getElementById('sports-hall-localisation').value = record.localisation;
+            setSelectedSportsHallCoachIds((record.coaches ?? []).map((coach) => coach.id));
+            setSportsHallCoachDropdownOpen(false);
             document.getElementById('btn-save-sports-hall').textContent = `Enregistrer salle #${record.id}`;
             setMessage(refs.msg.sportsHalls, `Edition salle #${record.id}.`, 'warn');
         }
@@ -1825,13 +2693,38 @@ function bindEvents() {
         if (action === 'program-delete') deleteProgram(id);
         if (action === 'program-edit' && record) {
             state.editing.programId = record.id;
+            document.getElementById('program-title').value = record.title;
+            document.getElementById('program-course-type').value = record.course_type ?? '';
             document.getElementById('program-day').value = record.day;
-            document.getElementById('program-start-time').value = record.start_time;
-            document.getElementById('program-end-time').value = record.end_time;
+            document.getElementById('program-start-time').value = formatTimeValue(record.start_time);
+            document.getElementById('program-duration').value = record.duration;
+            document.getElementById('program-screen-id').value = record.screen_id ?? '';
             document.getElementById('program-coach').value = record.coach;
             document.getElementById('program-room').value = record.room;
+            document.getElementById('program-display-order').value = record.display_order ?? 1;
+            document.getElementById('program-is-active').value = record.is_active ? '1' : '0';
             document.getElementById('btn-save-program').textContent = `Enregistrer programme #${record.id}`;
             setMessage(refs.msg.programs, `Edition programme #${record.id}.`, 'warn');
+        }
+    });
+
+    refs.table.coaches.addEventListener('click', (event) => {
+        const btn = event.target.closest('button[data-action]');
+        if (!btn) return;
+        const id = btn.dataset.id;
+        const action = btn.dataset.action;
+        const record = state.coaches.find((coach) => String(coach.id) === String(id));
+
+        if (action === 'coach-delete') deleteCoach(id);
+        if (action === 'coach-edit' && record) {
+            state.editing.coachId = record.id;
+            document.getElementById('coach-name').value = record.name;
+            document.getElementById('coach-email').value = record.email ?? '';
+            document.getElementById('coach-first-name').value = record.first_name ?? '';
+            document.getElementById('coach-specialty').value = record.specialty ?? '';
+            document.getElementById('coach-is-active').value = record.is_active ? '1' : '0';
+            document.getElementById('btn-save-coach').textContent = `Enregistrer coach #${record.id}`;
+            setMessage(refs.msg.coaches, `Edition coach #${record.id}.`, 'warn');
         }
     });
 
@@ -1919,37 +2812,3 @@ boot();
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

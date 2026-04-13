@@ -14,7 +14,7 @@ use Illuminate\Support\Str;
 
 class ScreenController extends Controller
 {
-    private const ALLOWED_STATUS = ['online', 'offline', 'maintenance'];
+    private const ALLOWED_STATUS = ['online', 'offline'];
     private const ALLOWED_EMPLACEMENTS = ['entree', 'sortie', 'cafeteria'];
 
     public function index(): JsonResponse
@@ -47,7 +47,7 @@ class ScreenController extends Controller
     {
         $data = $request->validate([
             'name' => ['required', 'string', 'max:120'],
-            'emplacement' => ['required', 'in:'.implode(',', self::ALLOWED_EMPLACEMENTS)],
+            'emplacement' => ['sometimes', 'nullable', 'in:'.implode(',', self::ALLOWED_EMPLACEMENTS)],
             'sports_hall_id' => ['required', 'exists:sports_halls,id'],
             'status' => ['nullable', 'in:'.implode(',', self::ALLOWED_STATUS)],
         ]);
@@ -56,11 +56,14 @@ class ScreenController extends Controller
 
         $payload = [
             'name' => $data['name'],
-            'emplacement' => $data['emplacement'],
             'sports_hall_id' => $sportsHall->id,
             'status' => $data['status'] ?? 'offline',
             'device_key' => $this->generateUniqueDeviceKey(),
         ];
+
+        if (array_key_exists('emplacement', $data) && filled($data['emplacement'])) {
+            $payload['emplacement'] = $data['emplacement'];
+        }
 
         if (Schema::hasColumn('screens', 'localisation')) {
             $payload['localisation'] = $sportsHall->localisation;
@@ -99,10 +102,14 @@ class ScreenController extends Controller
     {
         $data = $request->validate([
             'name' => ['sometimes', 'required', 'string', 'max:120'],
-            'emplacement' => ['sometimes', 'required', 'in:'.implode(',', self::ALLOWED_EMPLACEMENTS)],
+            'emplacement' => ['sometimes', 'nullable', 'in:'.implode(',', self::ALLOWED_EMPLACEMENTS)],
             'sports_hall_id' => ['sometimes', 'required', 'exists:sports_halls,id'],
             'status' => ['sometimes', 'required', 'in:'.implode(',', self::ALLOWED_STATUS)],
         ]);
+
+        if (array_key_exists('emplacement', $data) && blank($data['emplacement'])) {
+            unset($data['emplacement']);
+        }
 
         if (array_key_exists('sports_hall_id', $data) && Schema::hasColumn('screens', 'localisation')) {
             $sportsHall = SportsHall::find((int) $data['sports_hall_id']);

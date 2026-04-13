@@ -36,10 +36,28 @@ class AuthController extends Controller
             ], 422);
         }
 
-        [$challenge, $otpCode] = $this->createChallenge(
+        if (! in_array($user->role, ['admin', 'manager'], true)) {
+            return response()->json([
+                'message' => 'Access denied. Dashboard is reserved for admin and manager.',
+            ], 403);
+        }
+        $deviceName = $data['device_name'] ?? self::DEFAULT_DEVICE_NAME;
+        $activeChallenge = $this->findActiveChallenge($user, $deviceName);
+
+        if ($activeChallenge) {
+            return response()->json([
+                'message' => 'Verification code already sent. Use the latest OTP received without clicking login again.',
+                'two_factor_required' => true,
+                'challenge_token' => $activeChallenge->challenge_token,
+                'expires_at' => $activeChallenge->expires_at,
+                'otp_already_sent' => true,
+            ], 202);
+        }
+
+        [$challenge] = $this->createChallenge(
             request: $request,
             user: $user,
-            deviceName: $data['device_name'] ?? self::DEFAULT_DEVICE_NAME
+            deviceName: $deviceName
         );
 
         $payload = [
@@ -48,10 +66,6 @@ class AuthController extends Controller
             'challenge_token' => $challenge->challenge_token,
             'expires_at' => $challenge->expires_at,
         ];
-
-        if ($this->shouldExposeDebugOtp()) {
-            $payload['debug_otp'] = $otpCode;
-        }
 
         return response()->json($payload, 202);
     }
@@ -150,10 +164,6 @@ class AuthController extends Controller
             'expires_at' => $challenge->expires_at,
         ];
 
-        if ($this->shouldExposeDebugOtp()) {
-            $payload['debug_otp'] = $otpCode;
-        }
-
         return response()->json($payload);
     }
 
@@ -233,6 +243,17 @@ class AuthController extends Controller
         return str_pad((string) random_int(0, 999999), 6, '0', STR_PAD_LEFT);
     }
 
+    private function findActiveChallenge(User $user, string $deviceName): ?LoginChallenge
+    {
+        return LoginChallenge::query()
+            ->where('user_id', $user->id)
+            ->where('device_name', $deviceName)
+            ->whereNull('consumed_at')
+            ->where('expires_at', '>', now())
+            ->latest('id')
+            ->first();
+    }
+
     private function hashOtp(string $otpCode): string
     {
         return hash('sha256', $otpCode.'|'.config('app.key'));
@@ -257,8 +278,8 @@ class AuthController extends Controller
         }
     }
 
-    private function shouldExposeDebugOtp(): bool
-    {
-        return app()->environment('local') || (bool) config('app.debug');
-    }
+
 }
+
+
+

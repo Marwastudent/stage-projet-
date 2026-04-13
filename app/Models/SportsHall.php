@@ -14,10 +14,16 @@ class SportsHall extends Model
         'name',
         'matricule',
         'localisation',
+        'maps_url',
     ];
 
     public function screens(): HasMany
     {
         return $this->hasMany(Screen::class);
+    }
+
+    public function coaches(): HasMany
+    {
+        return $this->hasMany(Coach::class);
     }
 }
