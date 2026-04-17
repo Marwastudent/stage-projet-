@@ -49,7 +49,6 @@ php artisan serve
 ## Comptes seedes
 - admin: `admin@club.local` / `password123`
 - manager: `manager@club.local` / `password123`
-- client: `client@club.local` / `password123`
 
 ## Authentification API
 - `POST /api/login`
@@ -80,7 +79,6 @@ Reponse: token Bearer a utiliser dans `Authorization: Bearer <token>`.
 ## Roles
 - `admin`: acces complet + gestion utilisateurs
 - `manager`: gestion ecrans, medias, programmes, playlists
-- `client`: lecture uniquement
 
 ## Player ecran
 - Feed JSON: `GET /api/player/{device_key}`
